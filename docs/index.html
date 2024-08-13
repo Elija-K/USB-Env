@@ -18,12 +18,36 @@
 </body>
 </html>
 <script>
-    let url = document.URL
-    let urlarray = url.split("?")
-    let serialnumber = urlarray[1]
-    document.getElementById("posserialnum").innerHTML = "Mögliche Seriennummer: " + serialnumber
+    let url = document.URL;
+    let urlarray = url.split("?");
+    let serialnumber = urlarray[1];
+    document.getElementById("posserialnum").innerHTML = "Mögliche Seriennummer: " + serialnumber;
 
     function submit() {
-        serial = document.getElementById
+        serial = document.getElementById("serialnum").value;
+        name = document.getElementById("name").value;
+        data = serial + name
+        console.log("Serial: " + serial);
+        console.log("Name: " + name);
+        console.log("Data for Chksm: " + data);
+        // Checksum
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Request: " + xhttp.responseText);
+                window.checksumraw = xhttp.responseText;
+            }
+        };
+    let geturl = "https://api.hashify.net/hash/md5/hex?value=" + data;
+    xhttp.open("GET", geturl, true);
+    xhttp.send();
+    setTimeout(() => {
+        let checksumjson =  JSON.parse(window.checksumraw);
+        let checksum = checksumjson["Digest"];
+        console.log("Checksum: " + checksum);
+        let gotourl = "http://127.0.0.1:5000/?" + checksum + "?" + name + "?" + serial;
+        console.log("Redirect URL: " + gotourl);
+        window.location.href = gotourl;
+    }, 1000);
     }
 </script>
