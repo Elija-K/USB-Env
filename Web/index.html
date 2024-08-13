@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USB Stick Register</title>
+    <link rel="stylesheet" href="default.css">
+</head>
+<body>
+    <h1>Anmeldung deines USB Sticks</h1>
+    <h3 id="posserialnum">Mögliche Seriennummer: Serial Number</h3>
+    <p>Was ist die Seriennummer deines USB-Sticks? (Bei einem gekauften USB-Stick auf der Datei serial.txt)</p>
+    <input type="text" placeholder="Seriennummer" id="serialnum">
+    <p>Dein Name? (Damit wir einen privaten Schlüssel für dich machen können)</p>
+    <input type="text" id="name">
+    <p>Wenn du Fertig bist kannst du auf Abschicken klicken</p>
+    <button onclick="submit()">Abschicken</button>
+</body>
+</html>
+<script>
+    let url = document.URL
+    let urlarray = url.split("?")
+    let serialnum = urlarray[1]
+    document.getElementById("posserialnum").innerHTML = "Mögliche Seriennummer: " + serialnumber
+
+    function submit() {
+        serial = document.getElementById
+    }
+</script>
